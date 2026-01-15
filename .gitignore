@@ -1,0 +1,17 @@
+# Deployment
+deploy.sh
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Config with secrets
+config.env
+
+# macOS
+.DS_Store
+
+# Built workflow
+*.alfredworkflow
+.git-backup-*
