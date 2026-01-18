@@ -116,8 +116,6 @@ def main():
                 subtitle_parts = []
                 if snap_time:
                     subtitle_parts.append(snap_time)
-                if snap_desc:
-                    subtitle_parts.append(snap_desc)
                 if has_vmstate:
                     # Using RAM emoji and explicit text to make it obvious
                     subtitle_parts.append('🐏 RAM')
@@ -131,8 +129,13 @@ def main():
                 # Determine emoji based on state
                 emoji = '🐏' if has_vmstate else '📷'
                 
+                # Build display title: snap_name: description
+                display_title = f'{emoji} {snap_name}'
+                if snap_desc:
+                    display_title = f'{display_title}: {snap_desc}'
+                
                 items.append({
-                    'title': f'{emoji} {snap_name}',
+                    'title': display_title,
                     'subtitle': subtitle,
                     'arg': rollback_arg,
                     'valid': True,
