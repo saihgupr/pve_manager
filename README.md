@@ -18,7 +18,7 @@ Control your Proxmox VE containers and VMs directly from Alfred.
 
 ## Installation
 
-1. Download [PVE-Manager.alfredworkflow](https://github.com/DiggingForDinos/pve_manager/releases/latest)
+1. Download [PVE-Manager.alfredworkflow](https://github.com/saihgupr/pve_manager/releases/latest)
 2. Double-click to install in Alfred
 
 ## Setup
@@ -114,6 +114,6 @@ Select "Rollback" from the action menu to see a list of available snapshots for 
 
 ## Support & Issues
 
-Found a bug or have a feature request? Please submit an issue on [GitHub](https://github.com/DiggingForDinos/pve_manager/issues).
+Found a bug or have a feature request? Please submit an issue on [GitHub](https://github.com/saihgupr/pve_manager/issues).
 
 If you find this workflow helpful, please consider giving the repository a ⭐ star!
