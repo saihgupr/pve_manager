@@ -128,7 +128,7 @@
 		</array>
 	</dict>
 	<key>createdby</key>
-	<string>DiggingForDinos</string>
+	<string>saihgupr</string>
 	<key>description</key>
 	<string>Control Proxmox VE containers and VMs</string>
 	<key>disabled</key>
@@ -722,6 +722,6 @@ Control your Proxmox VE containers and VMs directly from Alfred.
 	<key>version</key>
 	<string>1.0.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/DiggingForDinos</string>
+	<string>https://github.com/saihgupr</string>
 </dict>
 </plist>
