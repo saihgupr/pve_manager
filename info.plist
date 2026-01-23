@@ -406,6 +406,7 @@ Control your Proxmox VE containers and VMs directly from Alfred.
 - ⌘+Enter: Restart immediately
 - ⌥+Enter: Open Web Console
 - Ctrl+Enter: Toggle Start/Stop
+- Shift+Enter: Graceful Shutdown
 
 **Snapshots:**
 - Select "Snapshot" -> Enter for auto-name
