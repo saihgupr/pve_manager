@@ -134,6 +134,14 @@ def main():
     # Build action list based on status and config
     actions = []
     
+    # Snapshot - always available (can snapshot stopped VMs too)
+    if cfg.get('action_snapshot', True):
+        actions.append(('📸', 'Snapshot', f'snapshot:{arg}', 'Create timestamped snapshot'))
+    
+    # Rollback - always available
+    if cfg.get('action_rollback', True):
+        actions.append(('⏪', 'Rollback', f'rollback:{arg}', 'Rollback to a snapshot'))
+    
     # Power actions (based on running state)
     if cfg.get('action_power', True):
         if is_running:
@@ -157,18 +165,18 @@ def main():
     if cfg.get('action_console', True) and is_running:
         actions.append(('🖥️', 'Console', f'console:{arg}', 'Open web console directly'))
     
-    # Snapshot - always available (can snapshot stopped VMs too)
-    if cfg.get('action_snapshot', True):
-        actions.append(('📸', 'Snapshot', f'snapshot:{arg}', 'Create timestamped snapshot'))
-    
-    # Rollback - always available
-    if cfg.get('action_rollback', True):
-        actions.append(('⏪', 'Rollback', f'rollback:{arg}', 'Rollback to a snapshot'))
-    
-    # Sort actions by usage count (most used first)
+    # Define default priorities to ensure Snapshot and Rollback are always first/second
+    default_priorities = {
+        'snapshot': 1000,
+        'rollback': 900
+    }
+
+    # Sort actions by default priority (descending), then by usage count (descending)
     action_usage = load_action_usage()
-    # Extract action name from arg (e.g., "restart:node:..." -> "restart")
-    actions.sort(key=lambda x: -action_usage.get(x[2].split(':')[0], 0))
+    actions.sort(key=lambda x: (
+        -default_priorities.get(x[2].split(':')[0], 0),
+        -action_usage.get(x[2].split(':')[0], 0)
+    ))
     
     # Filter actions if query exists
     # Special handling for "Description: <desc>"
@@ -215,10 +223,11 @@ def main():
                 
                 filtered_actions.append((action, match_score))
         
-        # Sort by match score (descending), then by usage count (descending)
+        # Sort by match score (descending), default priority, then by usage count (descending)
         action_usage = load_action_usage()
         filtered_actions.sort(key=lambda x: (
             -x[1],  # Match score (higher = better match)
+            -default_priorities.get(x[0][2].split(':')[0], 0),
             -action_usage.get(x[0][2].split(':')[0], 0)  # Usage count
         ))
         
